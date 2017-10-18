@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Scroller;
 
 /**
  * Created by 49479 on 2017/10/17.
@@ -28,25 +29,39 @@ public class CustomScrollerView extends View {
 
     private int lastX,lastY;
 
+    private Scroller mScroller ;
+
     private Bitmap bitmap;
 
     private Paint mPaint ;
 
     public CustomScrollerView(Context context) {
         super(context);
+        init();
     }
 
     public CustomScrollerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public CustomScrollerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init(){
+        mScroller = new Scroller(getContext());
     }
 
     @Override
     public void computeScroll() {
-        super.computeScroll();
+        Log.i("scroller1","computeScroll start");
+        if(mScroller.computeScrollOffset()){
+            Log.i("scroller1","computeScroll scroll to " +"   "+mScroller.getCurrX()+mScroller.getCurrY());
+            scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+            postInvalidate();
+        }
     }
 
     @Override
@@ -67,6 +82,8 @@ public class CustomScrollerView extends View {
         Log.i("CustomTouch","event x & y"+event.getX()+"   "+event.getY());
         switch(event.getAction()){
             case MotionEvent.ACTION_UP:
+                Log.i("CustomTouch","up");
+                smoothScrollTo(0,0);
                 break;
             case MotionEvent.ACTION_DOWN:
                 mStartDownX = event.getX();
@@ -144,4 +161,15 @@ public class CustomScrollerView extends View {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, (int) width, (int) height, matrix, true);
         return newBitmap;
     }
+
+    public void smoothScrollTo(int destX,int destY) {
+        int scrollX = getScrollX();
+        int deltaX = destX - scrollX;
+        int scrollY = getScrollY();
+        int deltaY = destY - scrollY;
+        Log.i("scroller1","startScroll");
+        mScroller.startScroll(scrollX,scrollY,deltaX,deltaY,500);
+        invalidate();
+    }
+
 }
