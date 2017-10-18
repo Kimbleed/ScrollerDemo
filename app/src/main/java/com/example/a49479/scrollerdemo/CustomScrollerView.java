@@ -58,7 +58,7 @@ public class CustomScrollerView extends View {
         mPaint.setColor(Color.BLACK);
         if(bitmap == null) {
             bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.super_man);
-            bitmap = compressImg(bitmap, mWidth, mHeight);
+//            bitmap = compressImg(bitmap, mWidth, mHeight);
         }
     }
 
@@ -114,8 +114,8 @@ public class CustomScrollerView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i("CustomDraw","view w & h    " + mWidth +"    "+mHeight);
-        Rect rect = new Rect(0,0,mWidth,mHeight);
+        Log.i("CustomDraw","view w & h    " + bitmap.getWidth() +"    "+bitmap.getHeight());
+        Rect rect = new Rect(0,0,bitmap.getWidth() ,bitmap.getHeight());
         Log.i("CustomDraw","bitmap w & h    " + bitmap.getWidth() +"    "+bitmap.getHeight());
         RectF rectF = new RectF(0,0,bitmap.getWidth(),bitmap.getHeight());
         canvas.drawBitmap(bitmap,rect,rectF,mPaint);
