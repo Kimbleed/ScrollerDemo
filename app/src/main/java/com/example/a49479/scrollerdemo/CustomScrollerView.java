@@ -107,6 +107,7 @@ public class CustomScrollerView extends View {
 //                Log.i("CustomTouch","scroll x & y"+((View)getParent()).getScrollX()+"   "+((View)getParent()).getScrollY());
 //                break;
 //        }
+//
 //        return true;
 //    }
 
