@@ -15,13 +15,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
  * Created by 49479 on 2017/10/17.
  */
 
-public class CustomScrollerView extends View {
+public class CustomScrollerView extends LinearLayout {
 
     private int mWidth,mHeight;
 
@@ -135,7 +136,7 @@ public class CustomScrollerView extends View {
         Rect rect = new Rect(0,0,bitmap.getWidth() ,bitmap.getHeight());
         Log.i("CustomDraw","bitmap w & h    " + bitmap.getWidth() +"    "+bitmap.getHeight());
         RectF rectF = new RectF(0,0,bitmap.getWidth(),bitmap.getHeight());
-        canvas.drawBitmap(bitmap,rect,rectF,mPaint);
+//        canvas.drawBitmap(bitmap,rect,rectF,mPaint);
 //        drawText(canvas,mPaint,"Fuck");
     }
 
